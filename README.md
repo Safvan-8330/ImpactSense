@@ -19,11 +19,11 @@ This project was built to demonstrate the integration of machine learning models
 * 🧠 **AI Predictive Engine:** Utilizes a heavily tuned Random Forest model (100 estimators) to evaluate Subterranean Depth and Regional Hazard Coefficients, outputting a live safety probability.
 * 🛰️ **3D Interactive Globe:** A fully interactive, spinning 3D orthographic projection that visually locks onto the target coordinates.
 * 📍 **Live Reverse Geocoding:** Automatically translates raw Latitude and Longitude inputs into readable, English-translated city and country names.
-* 📊 **Telemetry Signature:** A custom Radar Chart that maps out the "threat footprint" of the incoming data, allowing for instant, visual hazard recognition.
-* 🎨 **Dark Theme UI:** Features a custom-coded, responsive Glassmorphism design with a CSS-animated live data ticker and seamless page routing.
+*📊 **Seismic Threat Matrix:** Strips away confusing scientific jargon and visualizes the exact danger breakdown (Fault Line Proximity, Surface Shake, Area     History, and Quake Depth) using an intuitive, color-coded dashboard.
+* 🎨 **Locked Dark Theme UI:** Features a custom-coded, responsive Glassmorphism design configured to permanently display in high-contrast dark mode for optimal readability in emergency command center environments.
 
 ## ⚙️ How It Works
 1. **Input Telemetry:** The operator inputs target coordinates (Lat/Lon) alongside the normalized depth (Z-Score) and historical regional risk.
 2. **Reverse Geocoding:** The system pings the Nominatim API to identify the real-world location (e.g., "Tokyo, Japan").
 3. **AI Processing:** The data is pushed through the Random Forest model to calculate a threat probability score.
-4. **Visual Render:** The UI dynamically renders the diagnostic output, sounds an audio alarm if the threat is critical, plots the Telemetry Signature, and spins the 3D globe to the exact target location.
+4. **Visual Render:** The UI dynamically renders the diagnostic output, sounds an audio alarm if the threat is critical, plots the Seismic Threat Matrix, and spins the 3D globe to the exact target location.
