@@ -245,14 +245,32 @@ def show_dashboard():
                     st.write("Structural integrity holding. No severe seismic anomalies detected.")
                     st.progress(int(confidence_score), text=f"AI Safety Confidence: {confidence_score:.1f}%")
                 
-                st.markdown("<br><b>Telemetry Signature:</b>", unsafe_allow_html=True)
-                categories = ['Depth Impact', 'Regional Risk', 'Lat Anomaly', 'Lon Anomaly']
-                fig_radar = go.Figure(go.Scatterpolar(
-                    r=[abs(depth_scaled)*3, location_risk, abs(latitude)/10, abs(longitude)/20],
-                    theta=categories, fill='toself', line_color='#00f2fe', fillcolor='rgba(0, 242, 254, 0.2)'
+                st.markdown("<br><b>Seismic Threat Matrix:</b>", unsafe_allow_html=True)
+                
+                # We scale the values so they look like percentages (0 to 100) on the bars
+                categories = ['Fault Line', 'Surface Shake', 'Area History', 'Quake Depth']
+                values = [abs(longitude)/3.6, abs(latitude)/1.8, location_risk*10, abs(depth_scaled)*30] 
+                
+                fig_bars = go.Figure(go.Bar(
+                    x=values,
+                    y=categories,
+                    orientation='h',
+                    marker=dict(
+                        color=values,
+                        colorscale=[[0, '#00f2fe'], [0.5, '#4facfe'], [1, '#ff4b4b']], 
+                        cmin=0,
+                        cmax=100
+                    )
                 ))
-                fig_radar.update_layout(polar=dict(radialaxis=dict(visible=False)), showlegend=False, paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font=dict(color='#e0eef7', size=14), margin=dict(l=20, r=20, t=20, b=20))
-                st.plotly_chart(fig_radar, use_container_width=True)
+                fig_bars.update_layout(
+                    xaxis=dict(range=[0, 100], visible=False), 
+                    yaxis=dict(tickfont=dict(color='#e0eef7', size=14, family="Arial"), title=None),
+                    paper_bgcolor='rgba(0,0,0,0)', 
+                    plot_bgcolor='rgba(0,0,0,0)',
+                    margin=dict(l=10, r=20, t=20, b=10), 
+                    height=220 
+                )
+                st.plotly_chart(fig_bars, use_container_width=True)
 
             with res_col2:
                 st.subheader("Live Geospatial Target:")
